@@ -1,0 +1,59 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Aplicacion para la gestion del las responsabilidades de los integrantes de la casa
+
+Resources:
+  ResponsabilidadesTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: ResponsabilidadesCasa
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: id
+          KeyType: HASH
+
+  NotifyFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./
+      Handler: handler.notify
+      Runtime: nodejs18.x
+      Description: Notifica y actualiza responsabilidades
+      Timeout: 30
+      MemorySize: 128
+      Environment:
+        Variables:
+          TABLE_NAME: !Ref ResponsabilidadesTable
+          GUPSHUP_URL: https://api.gupshup.io/sm/api/v1/msg
+          API_KEY: pt7fkpngx6g6orenrc0jhreyfwammfq3
+          GUPSHUP_SENDER: 573233035205
+          GUPSHUP_APP_NAME: WhatsappHubTest1
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref ResponsabilidadesTable
+      Events:
+        Schedule1:
+          Type: Schedule
+          Properties:
+            # todos los lunes y jueves a las 4pm
+            Schedule: cron(0 16 ? * MON,THU *)
+            Enabled: true
+        ApiGateway:
+          Type: Api
+          Properties:
+            Path: /notify
+            Method: post
+
+Outputs:
+  NotifyFunctionArn:
+    Description: "ARN de la funcion Lambda"
+    Value: !GetAtt NotifyFunction.Arn
+  ResponsabilidadesTableName:
+    Description: "Nombre de la tabla DynamoDB"
+    Value: !Ref ResponsabilidadesTable
+  ApiGatewayInvokeURL:
+    Description: "URL de invocacion de la API Gateway"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/notify/"

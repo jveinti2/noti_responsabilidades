@@ -1,0 +1,46 @@
+{
+  "d:\\proyectosPersonales\\noti_responsabilidades\\samconfig.toml": {
+    "versionFramework": "4.7.0",
+    "servicePath": "d:\\proyectosPersonales\\noti_responsabilidades\\samconfig.toml",
+    "serviceConfigFileName": "samconfig.toml",
+    "service": {
+      "version": 0.1,
+      "default": {
+        "deploy": {
+          "parameters": {
+            "stack_name": "noti-responsabilidades",
+            "resolve_s3": true,
+            "s3_prefix": "noti-responsabilidades",
+            "region": "us-east-1",
+            "profile": "pdesarrollo",
+            "capabilities": "CAPABILITY_IAM",
+            "image_repositories": []
+          }
+        }
+      }
+    },
+    "dashboard": {
+      "isEnabledForService": false,
+      "requiredAuthentication": false,
+      "orgFeaturesInUse": null,
+      "orgObservabilityIntegrations": null,
+      "serviceAppId": null,
+      "serviceProvider": null,
+      "instanceParameters": null
+    },
+    "serviceRawFile": "version = 0.1\r\n[default.deploy.parameters]\r\nstack_name = \"noti-responsabilidades\"\r\nresolve_s3 = true\r\ns3_prefix = \"noti-responsabilidades\"\r\nregion = \"us-east-1\"\r\nprofile = \"pdesarrollo\"\r\ncapabilities = \"CAPABILITY_IAM\"\r\nimage_repositories = []\r\n",
+    "command": [
+      "print"
+    ],
+    "options": {},
+    "orgId": "9c49c922-9095-4086-8440-e62b297769cf",
+    "orgName": "jbpersonalprojects",
+    "userId": "HkWFpR4vxpYQQ6C1wt",
+    "userName": "jbpersonalprojects",
+    "serviceProviderAwsCfStackId": null,
+    "serviceProviderAwsCfStackCreated": null,
+    "serviceProviderAwsCfStackUpdated": null,
+    "serviceProviderAwsCfStackStatus": null,
+    "serviceProviderAwsCfStackOutputs": null
+  }
+}
