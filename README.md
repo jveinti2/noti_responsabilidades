@@ -8,7 +8,7 @@ La aplicación permite asignar responsabilidades de manera rotativa entre los in
 
 ## 🏗️ Arquitectura
 
-![Arquitectura de la Aplicación](./arquitectura.png)
+![Arquitectura de la Aplicación](./image.png)
 
 La solución utiliza los siguientes servicios:
 
